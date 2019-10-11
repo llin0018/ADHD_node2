@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+  <head>
+    <title>Supporting ADHD patients</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+      <link rel="stylesheet" href="scss/bootstrap/style1.scss">
+      <link rel="stylesheet" href="scss/bootstrap/utilities/style.scss">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="scss/bootstrap/style1.scss">
+  </head>
+  <script type="text/javascript">
+      //variables
+      var map;
+      var lat ;
+      var lng ;
+      var pyrmont;
+      var address;
+      var marker;
+      var infowindow;
+      var markers = [];
+      var ttypes; //value of type like 'atm','cafe';
+      var range = 500;
+      var filter = 'gym';
+      var calval=0;
+      //initialize Map
+
+
+      function fn_marker(val)
+      {
+          var scaleval = 12;
+          var color = 'red';
+          var fillcolor = 'blue';
+          var strokeweight = 2;
+          if (val.defaultValue == 'circle')
+              marker.setIcon({path: google.maps.SymbolPath.CIRCLE, scale: scaleval, strokeColor: color,
+                  strokeOpacity: 1,
+                  strokeWeight: strokeweight,
+                  fillColor: fillcolor,
+                  fillOpacity: .6, });
+          if (val.defaultValue == 'arrow')
+              marker.setIcon({path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: scaleval, strokeColor: color,
+                  strokeOpacity: 1,
+                  strokeWeight: strokeweight,
+                  fillColor: fillcolor,
+                  fillOpacity: .6, });
+          if (val.defaultValue == 'custom')
+              marker.setIcon({
+                  url: "images/greenicon.ico",
+                  size: new google.maps.Size(71, 71),
+                  origin: new google.maps.Point(0, 0),
+                  anchor: new google.maps.Point(17, 17),
+                  scaledSize: new google.maps.Size(50, 50)});
+          if (val.defaultValue == 'mark')
+              marker.setIcon({path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z', scale: scaleval / 8, strokeColor: color,
+                  strokeOpacity: 1,
+                  strokeWeight: strokeweight,
+                  fillColor: fillcolor,
+                  fillOpacity: .6, });
+          animation();
+      }
+      function animation()
+      {
+          var ani = google.maps.Animation.DROP;
+          marker.setAnimation(ani);
+          setTimeout(function () {
+              marker.setAnimation(null);
+          }, 4000);
+      }
+      // function fn_zoom(para)
+      // {
+      //     if (para.defaultValue == 'world')
+      //         map.setZoom(1);
+      //     if (para.defaultValue == 'continent')
+      //         map.setZoom(5);
+      //     if (para.defaultValue == 'city')
+      //         map.setZoom(10);
+      //     if (para.defaultValue == 'streets')
+      //         map.setZoom(15);
+      //     if (para.defaultValue == 'building')
+      //         map.setZoom(20);
+      // }
+      function calculatedistance(s1, s2, e1, e2)
+      {
+          var latlngA = new google.maps.LatLng(s1, s2);
+          var latlngB = new google.maps.LatLng(e1, e2);
+          var dist = google.maps.geometry.spherical.computeDistanceBetween(latlngA, latlngB);
+          return (dist / 1000).toFixed(2);
+      }
+      // function add_list(list, value1) {
+      //     var ul = document.getElementById(list);
+      //     var li = document.createElement("li");
+      //     li.appendChild(document.createTextNode(value1));
+      //     ul.appendChild(li);
+      // }
+      // function fn_clearmarker(pmarker)
+      // {
+      //     for (i = 0; i < pmarker.length; i++)
+      //         pmarker[i].setMap(null);
+      // }
+
+      function fn_type(sel_para)
+      {
+          var sel=document.getElementById(sel_para);
+
+      }
+
+
+      function initMap()
+      {
+          infowindow = new google.maps.InfoWindow();
+
+          //
+          // navigator.geolocation.getCurrentPosition(successCallback,errorCallback,{timeout:10000})
+          navigator.geolocation.getCurrentPosition(function(position) {
+
+
+              // Center on user's current location if geolocation prompt allowed
+              lati = position.coords.latitude;
+              lngi = position.coords.longitude;
+
+              console.log(lati);
+              console.log(lngi);
+
+
+
+              pyrmont = {lat: parseFloat(lati), lng: parseFloat(lngi)};
+              map = new google.maps.Map(document.getElementById('map'),
+                  {
+                      center: pyrmont,
+                      zoom: 13
+                  });
+
+              marker = new google.maps.Marker({
+                  map: map,
+                  draggable: false,
+                  animation: google.maps.Animation.BOUNCE,
+                  title:'Current Location',
+                  icon: {url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"},
+
+                  scaledSize : new google.maps.Size(40, 40),
+                  position: {lat: parseFloat(lati), lng: parseFloat(lngi)}
+              });
+
+              var service = new google.maps.places.PlacesService(map)
+              service.nearbySearch(
+                  {
+                      location: pyrmont,
+                      radius: range,
+                      type: [ttypes],
+                      name: filter
+                  }, processResults);
+          });
+      }
+
+      function processResults(results,status,pagination)
+      {
+          createMarker(results);
+      }
+
+
+
+
+
+      function createMarker(places)
+      {
+          var placelist=document.getElementById('places');
+          var service = new google.maps.places.PlacesService(map);
+
+          placelist.innerHTML="";
+          for (var i=0; i < places.length; i++) {
+
+              var place = places[i];
+
+              var request = {
+                  placeId: place.place_id,
+                  fields: ['name', 'formatted_address', 'place_id', 'geometry']
+              };
+
+              service.getDetails(request, function(place, status) {
+                  if (status === google.maps.places.PlacesServiceStatus.OK) {
+                      calculatedistance(pyrmont.lat, pyrmont.lng, place.geometry.location.lat(), place.geometry.location.lng())
+                      var marker = new google.maps.Marker({
+
+                          map: map,
+                          position: place.geometry.location,
+
+                          title: 'You are ' + calval + ' KMs away',
+
+                      });
+
+                      google.maps.event.addListener(marker, 'click', function() {
+                          var fre="https://www.google.com/maps/place/"+place.name + "," + place.formatted_address + place.geometry.location.lat() + "," + place.geometry.location.lng();
+                          var fre2 = "https://www.google.com/maps/place/?q=place_id:" + place.place_id;
+                          var link = ' href=' + fre2;
+                          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' +
+                              place.formatted_address + '<br>' +'</div>' + '<p>'+'<a target="_blank" ' + link + '><strong>Get Directions / Larger Map</strong> </a></p>');
+                          // '<p><a href="https://maps.google.com/maps?q=" + place.geometry.location.lat() + "," + place.geometry.location.lng()><strong>Get Directions / Larger Map</strong> </a></p>' +
+                          // '</div>'
+
+                          infowindow.open(map, this);
+                      });
+                  }
+              });
+
+              // var marker = new google.maps.Marker({
+              //     map: map,
+              //     position: place.geometry.location,
+              //     title: place.name + ' & Distance: ' + calval + ' KM'
+              // });
+              // google.maps.event.addListener(marker, 'click', function() {
+              //     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+              //         'Place Title: ' + place.title + '<br>' + '</div>');
+              //     infowindow.open(map, this);
+              // });
+
+              placelist.innerHTML += "<li>" + (i + 1) + "|" + place.name + "|" + place.geometry.location.lat() + "|" + place.geometry.location.lng() + "</li>";
+              map.setZoom(14);
+          }
+      }
+
+      function fn_mark(para)
+      {
+//alert(para[2]);
+          new google.maps.Marker({map:map,position:{lat:parseFloat(para[2]),lng:parseFloat(para[3])},icon:{path:google.maps.SymbolPath.CIRCLE,scale:5}});
+      }
+
+      function fn_sel(para)
+      {
+          if (document.getElementById('range1').checked) range=document.getElementById('range1').value;
+          if (document.getElementById('range2').checked) range=document.getElementById('range2').value;
+          if (document.getElementById('range3').checked) range=document.getElementById('range3').value;
+
+
+          initMap();
+      }
+      function fn_submit()
+      {
+          filter=document.getElementById('filter').value;
+          initMap();
+      }
+
+      function def() {
+          filter=document.getElementById('Gym').value;
+          initmap();
+      }
+
+
+      // function fn_zoom(para)
+      // {
+      //     if (para.defaultValue == 'world')
+      //         map.setZoom(1);
+      //     if (para.defaultValue == 'continent')
+      //         map.setZoom(5);
+      //     if (para.defaultValue == 'city')
+      //         map.setZoom(10);
+      //     if (para.defaultValue == 'streets')
+      //         map.setZoom(15);
+      //     if (para.defaultValue == 'building')
+      //         map.setZoom(20);
+      // }
+      function calculatedistance(s1, s2, e1, e2)
+      {
+          var latlngA = new google.maps.LatLng(s1, s2);
+          var latlngB = new google.maps.LatLng(e1, e2);
+          var dist = google.maps.geometry.spherical.computeDistanceBetween(latlngA, latlngB);
+          calval=(dist/1000).toFixed(2);
+      }
+      function add_list(list, value1) {
+          var ul = document.getElementById(list);
+          var li = document.createElement("li");
+          li.appendChild(document.createTextNode(value1));
+          ul.appendChild(li);
+      }
+      function fn_clearmarker(pmarker)
+      {
+          for (i = 0; i < pmarker.length; i++)
+              pmarker[i].setMap(null);
+      }
+
+
+      // function fn_marker_pic(imgtitle, caption)
+      // {
+      //     marker = new MarkerWithLabel({
+      //         map: map,
+      //         position: {lat: parseFloat(lat), lng: parseFloat(lng)},
+      //         labelContent: fn_weatherpic(imgtitle, caption),
+      //         labelStyle: {opacity: 1},
+      //         labelAnchor: new google.maps.Point(60, 50),
+      //     });
+      //     //update the values of opt option.
+      //     fn_type('filter');
+      // }
+
+      //
+      // function fn_type(sel_para)
+      // {
+      //     var opt=[
+      //         "All",
+      //         "accounting",
+      //         "airport",
+      //         "amusement_park",
+      //         "aquarium",
+      //         "art_gallery",
+      //         "atm",
+      //         "bakery",
+      //         "bank",
+      //         "bar",
+      //         "beauty_salon",
+      //         "bicycle_store",
+      //         "book_store",
+      //         "bowling_alley",
+      //         "bus_station",
+      //         "cafe",
+      //         "campground",
+      //         "car_dealer",
+      //         "car_rental",
+      //         "car_repair",
+      //         "car_wash",
+      //         "casino",
+      //         "cemetery",
+      //         "church",
+      //         "city_hall",
+      //         "clothing_store",
+      //         "convenience_store",
+      //         "courthouse",
+      //         "dentist",
+      //         "department_store",
+      //         "doctor",
+      //         "electrician",
+      //         "electronics_store",
+      //         "embassy",
+      //         "establishment",
+      //         "finance",
+      //         "fire_station",
+      //         "florist",
+      //         "food",
+      //         "funeral_home",
+      //         "furniture_store",
+      //         "gas_station",
+      //         "general_contractor",
+      //         "grocery_or_supermarket",
+      //         "gym",
+      //         "hair_care",
+      //         "hardware_store",
+      //         "health",
+      //         "hindu_temple",
+      //         "home_goods_store",
+      //         "hospital",
+      //         "insurance_agency",
+      //         "jewelry_store",
+      //         "laundry",
+      //         "lawyer",
+      //         "library",
+      //         "liquor_store",
+      //         "local_government_office",
+      //         "locksmith",
+      //         "lodging",
+      //         "meal_delivery",
+      //         "meal_takeaway",
+      //         "mosque",
+      //         "movie_rental",
+      //         "movie_theater",
+      //         "moving_company",
+      //         "museum",
+      //         "night_club",
+      //         "painter",
+      //         "park",
+      //         "parking",
+      //         "pet_store",
+      //         "pharmacy",
+      //         "physiotherapist",
+      //         "place_of_worship",
+      //         "plumber",
+      //         "police",
+      //         "post_office",
+      //         "real_estate_agency",
+      //         "restaurant",
+      //         "roofing_contractor",
+      //         "rv_park",
+      //         "school",
+      //         "shoe_store",
+      //         "shopping_mall",
+      //         "spa",
+      //         "stadium",
+      //         "storage",
+      //         "store",
+      //         "subway_station",
+      //         "synagogue",
+      //         "taxi_stand",
+      //         "train_station",
+      //         "travel_agency",
+      //         "university",
+      //         "veterinary_care",
+      //         "zoo"];
+      //     var sel=document.getElementById(sel_para);
+      //     for (i=0;i<opt.length;i++)
+      //     {
+      //         sel.options.add( new Option(opt[i],opt[i]) );
+      //     }
+      // }
+
+  </script>
+
+  <body class="goto-here">
+		<div class="py-1 bg-primary">
+    	<div class="container">
+    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+	    		<div class="col-lg-12 d-block">
+		    		<div class="row d-flex">
+
+				    </div>
+			    </div>
+		    </div>
+		  </div>
+    </div>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a style="font-family: Amatic SC, cursive;font-size: 50px" class="navbar-brand" href="home.html">ADDVICE</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nutrition</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="calculator.html">Nutrition calculator</a>
+                                <a class="dropdown-item" href="food.html">Food list</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Activities</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="quiz.html">IPAQ test</a>
+                                <a class="dropdown-item" href="contact.html">Near by activities(current location)</a>
+                                <a class="dropdown-item" href="contactownloc.html">Near by activities(search)</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a href="mit3.html" class="nav-link">Medical Centres</a></li>
+                        <li class="nav-item"><a href="blog.html" class="nav-link">Notification</a></li>
+                        <li class="nav-item"><a href="puzle.html" class="nav-link">Puzzle</a></li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <!-- END nav -->
+
+<!--    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">-->
+<!--          <div class="container">-->
+          <div class="co">
+
+              <!-- Panels -->
+              <div class="swipe">
+                  <div class="panel" data-img="images/gym.jpg">
+                      <div class="inner" style="opacity: 0.9">
+                          <h2 style="font-family: cursive;color: #82ae46">Workout</h2>
+                          <p style="font-size:25px;color: black">Exercise isn't just good for shedding fat and toning muscles. It can help keep the brain in better shape, too. When you exercise, your brain releases chemicals called neurotransmitters, including dopamine, which help with attention and clear thinking. People with ADHD often have less dopamine than usual in their brain..</p>
+                      </div>
+                  </div>
+                  <div class="panel" data-img="images/aerobic.jpg">
+                      <div class="inner" style="opacity: 0.9">
+                          <h2 style="font-family: cursive;color: #82ae46">Aerobic Exercise</h2>
+                          <p style="font-size:25px;color: black">Aerobic Exercise is a good way to increase your heart rate, and its always better to workout for 30 to 40 minutes everyday. Aerobic exercise creates new pathways in your brain and floods it with the chemicals that help you pay attention.  These activities include running, walking briskly, biking, swimming laps etc.</p>
+                      </div>
+                  </div>
+                  <div class="panel" data-img="images/martial.jpg">
+                      <div class="inner" style="opacity: 0.9">
+                          <h2 style="font-family: cursive;color: #82ae46">Martial arts</h2>
+                          <p style="font-size:25px;color: black">Complex physical activity, like martial arts, strengthens neural networks in the brain, and enables ADHD patients to practice self-control. Movement helps them develop coordination while building strength.</p>
+                      </div>
+                  </div>
+                  <div class="panel" data-img="images/yoga1.jpg">
+                      <div class="inner" style="opacity: 0.9">
+                          <h2 style="font-family: cursive;color: #82ae46">Yoga</h2>
+                          <p style="font-size:25px;color: black">Asanas can provide excellent relief in regards to ADHD symptoms, as they allow increased oxygen and blood flow to the brain -- which can have a balancing effect on the nervous system as a whole. They can help you to learn to lengthen and deepen the breath, which allows for an overall feeling of calm.</p>
+                      </div>
+                  </div>
+                  <div class="panel" data-img="images/swimm.jpg">
+                      <div class="inner"  style="opacity: 0.9">
+                          <h2 style="font-family: cursive;color: #82ae46">Swimming</h2>
+                          <p style="font-size:25px;color: black">When swimming, the added effect of water moving over the body creates a massaging sensation, promoting relaxation.Adults with ADHD can benefit from swimming as a way to release excess energy and improve concentration abilities.</p>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Info -->
+              <div class="info">
+
+                  <div class="buttons">
+                      <button class="btn-prev" disabled>&larr;</button>
+                      <button class="btn-next">&rarr;</button>
+                  </div>
+              </div>
+
+          </div>
+
+
+
+<!--      </div>-->
+    </div>
+
+    <section class="ftco-section contact-section bg-light">
+      <div class="container">
+      	<div class="row d-flex mb-5 contact-info">
+          <div class="w-100"></div>
+
+        </div>
+        <div class="row block-9">
+          <div class="col-md-6 order-md-last d-flex">
+<!--            <form action="#" class="bg-white p-5 contact-form">-->
+              <div style="margin-top: -40px;height: 100px" class="form-group">
+                  <div class="contai">
+                      <h5 style="color: white">Select an activity</h5>
+                  <div class="select">
+
+                      <select id="filter" onload="fn_type('Gym')">
+                          <option selected="selected" value="gym">Gym</option>
+                          <option value="parks">Parks</option>
+                          <option value="gym">Indoor Running</option>
+                          <option value="parks">outdoor Running</option>
+                          <option value="Strength Training">Strength Training</option>
+                          <option value="gym">Bicycling</option>
+                          <option value="gym">Martial arts</option>
+                          <option value="gym">Aerobic Exercise</option>
+
+
+
+                      </select>
+                  </div></br>
+                      <h5 style="color: white">Select the range</h5>
+                      <ul>
+                          <li>
+                              <input type="radio" id="range1" name="range" value="500" checked onclick="fn_sel(this)"/>
+<!--                              <input type="radio" id="range1" name="selector">-->
+                              <label for="range1">500 Meters</label>
+
+                              <div class="check"></div>
+                          </li>
+
+                          <li>
+                              <input type="radio" id="range2" name="range" value="1000"  onclick="fn_sel(this)"/>
+                              <label for="range2">1000 Meters</label>
+
+                              <div class="check"><div class="inside"></div></div>
+                          </li>
+
+                          <li>
+                              <input type="radio" id="range3" name="range" value="1500"  onclick="fn_sel(this)"/>
+                              <label for="range3">1500 Meters</label>
+
+                              <div class="check"><div class="inside"></div></div>
+                          </li>
+                      </ul>
+                      <div class="form-group">
+                          <ul id="places" onload="fn_clearmarker('gym')"></ul>
+                      </div>
+                      <div class="form-group">
+
+                          <input type="button" id="submit" value="submit" onclick="fn_submit()"  class="btn btn-primary py-3 px-5">
+                      </div>
+              </div>
+
+              </div>
+                </br></br></br>
+
+<!--              <div class="form-group">-->
+<!--                  <ul id="places" onload="fn_clearmarker('gym')"></ul>-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+
+<!--                  <input type="button" id="submit" value="submit" onclick="fn_submit()"  class="btn btn-primary py-3 px-5">-->
+<!--              </div>-->
+            </form>
+<!--              <table style="width:800px; margin:0 auto;">-->
+<!--                  <tr >-->
+<!--                      &lt;!&ndash;            <td>Select Type: </td><td><select id="filter"  onchange="fn_filter()"/> </td>&ndash;&gt;-->
+<!--                      <select id="filter" onload="fn_type('Gym')" >-->
+<!--                          <option selected="selected" value="gym">Gym</option>-->
+<!--                          <option value="Strength Training">Biking</option>-->
+<!--                          <option value="Running">Running</option>-->
+<!--                          <option value="Parks">Parks</option>-->
+<!--                          <option value="Mental Health">Medical Center</option>-->
+<!--                      </select>-->
+
+
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                      <td>Range:</td>-->
+<!--                      <td>-->
+<!--                          <input type="radio" id="range1" name="range" value="500" checked onclick="fn_sel(this)"/>500-->
+<!--                          <input type="radio" id="range2" name="range" value="1000" onclick="fn_sel(this)"/>1000-->
+
+
+<!--                      </td>-->
+
+<!--                  </tr>-->
+
+
+<!--                  <tr>-->
+<!--                      <td colspan="2"  >-->
+<!--                          <ul id="places" onload="fn_clearmarker('gym')"></ul>-->
+<!--                      </td>-->
+<!--                  </tr>-->
+<!--                  &lt;!&ndash;            <td colspan="2">&ndash;&gt;-->
+<!--                  &lt;!&ndash;                <input type="button" id="More" value="More" />&ndash;&gt;-->
+<!--                  &lt;!&ndash;            </td>&ndash;&gt;-->
+<!--                  &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--                  &lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--                  &lt;!&ndash;            <td>Filter:</td><td><input id="filter" size="15" onclick="fn_filter();"></td>&ndash;&gt;-->
+<!--                  &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--                  <tr>-->
+<!--                      <td colspan="2"><input type="button" id="submit" value="submit" onclick="fn_submit()"></td>-->
+<!--                  </tr>-->
+<!--              </table>-->
+<!--          -->
+          </div>
+
+          <div class="col-md-6 d-flex">
+          	<div id="map" class="bg-white"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftco-footer ftco-section">
+      <div class="container">
+      	<div class="row">
+      		<div class="mouse">
+						<a href="#" class="mouse-icon">
+							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+						</a>
+					</div>
+      	</div>
+
+
+            <p style="text-align: center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/scrollax.min.js"></script>
+        <script
+                src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyDG3k6Ps69PWJicK2HsWHFw2pbi--Cfz1E&callback=initMap&libraries=places,geometry">
+        </script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+    
+  </body>
+</html>

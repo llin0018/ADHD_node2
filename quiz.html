@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="scss/bootstrap/style1.scss">
+    <link rel="stylesheet" href="scss/bootstrap/utilities/style.scss">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="scss/bootstrap/style1.scss">
+    <title>International Physical Activity Questionnaires (IPAQ)</title>
+    <meta charset="utf-8">
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif; background-image: url("cereals.png");}
+        * {box-sizing: border-box;}
+
+        input[type=text], select, textarea {
+            width: 50%;
+            padding: 12px;
+            border: 1px solid black;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+            background-color: #D4FCD7 ;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        /*.container {*/
+        /*    border-radius: 5px;*/
+        /*    background-color: #f2f2f2;*/
+        /*    padding: 20px;*/
+        /*}*/
+    </style>
+</head>
+<body style="background-color: white" class="goto-here">
+<div class="py-1 bg-primary">
+
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a style="font-family: Amatic SC, cursive;font-size: 50px" class="navbar-brand" href="home.html">ADDVICE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nutrition</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="calculator.html">Nutrition calculator</a>
+                        <a class="dropdown-item" href="food.html">Food list</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Activities</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="quiz.html">IPAQ test</a>
+                        <a class="dropdown-item" href="contact.html">Near by activities(current location)</a>
+                        <a class="dropdown-item" href="contactownloc.html">Near by activities(search)</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="mit3.html" class="nav-link">Medical Centres</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Notification</a></li>
+                <li class="nav-item"><a href="puzle.html" class="nav-link">Puzzle</a></li>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->
+
+<div class="hero-wrap hero-bread" style="background-image: url('images/questionnaire.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+
+                <h1 class="mb-0 bread">TEST YOURSELF</h1>
+                <p class="breadcrumbs"><span class="mr-2">International</span> <span>Physical</span> <span>Activity</span> <span>Questionnaire</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div style="margin-left: 20px; margin-top: 100px" class="questionnaire">
+        <h2 style="color: black">Before searching for activity centers near you, you need to go through a questionnaire, and this suggests you the best activity based on the questions answered</h2>
+        <div class="content" style="margin-top: 50px">
+            <!--        <h2>1. During the last 7 days, on how many days did you do vigorous physical activities like heavy lifting, digging, aerobics, or fast bicycling？</h2>-->
+            <!--        <h3>(No vigorous physical activities, skip to question 3)</h3>-->
+            <!--        <ul>-->
+            <!--            <div class="content"><select id="vigDay">-->
+            <!--                <option value="0">0</option>-->
+            <!--                <option value="1">1</option>-->
+            <!--                <option value="2">2</option>-->
+            <!--                <option value="3">3</option>-->
+            <!--                <option value="4">4</option>-->
+            <!--                <option value="5">5</option>-->
+            <!--                <option value="6">6</option>-->
+            <!--                <option value="7">7</option>-->
+            <!--            </select> days per week-->
+            <!--            </div>-->
+            <!--        </ul>-->
+            <h3>Question 1</h3>
+            <label style="color: #0b0b0b">During the last 7 days, on how many days did you do vigorous physical activities like heavy lifting, digging, aerobics, or fast bicycling？</br></br></label>
+            <label style="color: red">(No vigorous physical activities, go to question 3, skip question 2)</label>
+            </br><select id="vigDay">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>&nbsp days per week
+            </br></br>
+        </div>
+        <div class="content">
+            <h3>Question 2</h3>
+            <label for="lname">How much time did you usually spend doing vigorous physical activities on one of those days？</label>
+            </br>
+
+            <div class="content"><select id="vigHour">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>&nbsp hours per day
+            </div>
+            <div class="content"><select id="vigMinute">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+            </select>&nbsp minutes per day
+            </div>
+
+            </br></br>
+        </div>
+        <div class="content">
+            <h3>Question 3</h3>
+            <label for="lname">During the last 7 days, on how many days did you do moderate physical activities like carrying light loads, bicycling at a regular pace, or doubles tennis？Do not include walking.</br></br></label>
+            <label style="color: red">(No moderate physical activities, go to to question 5, skip question 4)</label>
+            </br>
+            <div class="content"><select id="modDay">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>&nbsp days per week
+            </div>
+            </br></br>
+        </div>
+        <div class="content">
+            <h3>Question 4</h3>
+            <label for="lname">How much time did you usually spend doing moderate physical activities on one of those days？</label>
+            </br>
+            <div class="content"><select id="modHour">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>&nbsp hours per day
+            </div>
+            <div class="content"><select id="modMinute">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+            </select>&nbsp minutes per day
+            </div>
+            </br></br>
+        </div>
+        <div class="content">
+            <h3>Question 5</h3>
+            <label for="lname">During the last 7 days, on how many days did you walk for at least 10 minutes at a time？</label>
+            </br>
+            <div class="content"><select id="walkDay">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>&nbsp days per week
+            </div>
+            </br></br>
+        </div>
+        <div class="content">
+            <h3>Question 6</h3>
+            <label for="lname">How much time did you usually spend walking on one of those days？</label>
+            </br>
+            <div class="content"><select  id="walkHour">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>&nbsp hours per day
+            </div>
+            <div class="content"><select id="walkMinute">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+            </select>&nbsp minutes per day
+            </div>
+            </br></br>
+        </div>
+        <INPUT style="background-color:#62BD41;color: white;padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;" TYPE="BUTTON" VALUE="Submit" ONCLICK="physicalReport();btnEdit();" id="submit">
+        <INPUT style="background-color:#62BD41;color: white;padding: 12px 20px;border: none;
+  border-radius: 4px;visibility:hidden;" TYPE="BUTTON" VALUE="Go to maps" ONCLICK="btnEdit1()"  id="save">
+        </br></br>
+        <INPUT style="background-color:red;color: white;padding: 12px 20px;border: none;
+  border-radius: 4px;visibility:hidden;" TYPE="BUTTON" VALUE="Use Current Location" ONCLICK="location.href='contact.html'"  id="save1">
+        <INPUT style="background-color:red;color: white;padding: 12px 20px;border: none;
+  border-radius: 4px;visibility:hidden;" TYPE="BUTTON" VALUE="Enter Your Own Location" ONCLICK="location.href='contactownloc.html'"  id="save2">
+        <div id="report">
+        </div>
+        <!--    <input type ="button" value="submit" id="submit" onclick="physicalReport()">-->
+        <!--    <INPUT TYPE="button" VALUE="Go to Maps"  id="maps">-->
+
+
+
+
+    </div>
+
+</section>
+
+
+</br></br></br></br>
+<footer class="ftco-footer ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="mouse">
+                <a href="#" class="mouse-icon">
+                    <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+                </a>
+            </div>
+        </div>
+
+
+        <p style="text-align: center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+    </div>
+    </div>
+    </div>
+</footer>
+</div>
+<script src="js/questionnaire.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="js/google-map.js"></script>
+<script src="js/main.js"></script>
+</body>
+<script>
+    function btnEdit()
+    {
+        {document.getElementById("save").style.visibility="visible";}
+
+    }
+    function btnEdit1()
+    {
+        {document.getElementById("save1").style.visibility="visible";}
+        {document.getElementById("save2").style.visibility="visible";}
+    }
+</script>
+
+</html>

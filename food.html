@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Supporting ADHD patients</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/add-food.css">
+    <link rel="stylesheet" href="css/food_info.css">
+
+</head>
+<body class="goto-here">
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a style="font-family: Amatic SC, cursive;font-size: 50px" class="navbar-brand" href="home.html">ADDVICE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nutrition</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="calculator.html">Nutrition calculator</a>
+                        <a class="dropdown-item" href="food.html">Food list</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Activities</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="quiz.html">IPAQ test</a>
+                        <a class="dropdown-item" href="contact.html">Near by activities(current location)</a>
+                        <a class="dropdown-item" href="contactownloc.html">Near by activities(search)</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="mit3.html" class="nav-link">Medical Centres</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Notification</a></li>
+                <li class="nav-item"><a href="puzle.html" class="nav-link">Puzzle</a></li>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->
+
+<div class="hero-wrap hero-bread" style="background-image: url('images/nutrition_analyze.jpg'); height: 600px">
+    <!--	<div class="container">-->
+    <!--		<div class="row no-gutters slider-text align-items-center justify-content-center">-->
+    <!--			<div class="col-md-9 ftco-animate text-center">-->
+
+    <!--				<h1 class="mb-0 bread">Nutrition Calculator</h1>-->
+    <!--			</div>-->
+    <!--		</div>-->
+    <!--	</div>-->
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <div  class="conthead">
+                    <div style=" margin-top: 10px" class="animate seven">
+                        <span>F</span><span>o</span><span>o</span><span>d</span>
+                        <span>I</span><span>n</span><span>f</span><span>o</span><span>r</span><span>m</span><span>a</span><span>t</span><span>i</span><span>o</span><span>n</span>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="jmp">
+    <div class="container py-4">
+        <button class="switch_button" onclick="switch_but('protein')"><span class="protein_span"></span><p class="button_text">Protein</p></button>
+        <button class="switch_button" onclick="switch_but('minerals')"><span class="minerals_span"></span><p class="button_text">Minerals</p></button>
+        <button class="switch_button" onclick="switch_but('omega')"><span class="omega_span"></span><p class="button_text">Omega N-3</p></button>
+    </div>
+    <div class="container py-4" id="protein" style="display:block;">
+        <div>
+            <h1 style="font-family:Amatic SC, cursive; font-size: 100px">Protein</h1>
+            <p style="line-height: 1.6; font-size: 25px; color: #0b0b0b; font-family: Arial">Protein is a good source for our body to generate neurotransmitters, which plays an important role in the communication of brain cells.
+                It also prevents elevated blood sugar levels, which can increase our body's hyperactivity and impulsivity if our blood sugar levels are too high.</p>
+        </div>
+        <div class="gal">
+            <figure class="gal__item--1">
+                <img src="images/egg.jpg" class="gal__img" alt="Image 1">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Egg</figcaption>
+            </figure>
+            <figure class="gal__item--2">
+                <img src="images/milk.jpg" class="gal__img" alt="Image 2">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Milk</figcaption>
+            </figure>
+            <figure class="gal__item--3">
+                <img src="images/salmon.jpg" class="gal__img" alt="Image 3">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Salmon</figcaption>
+            </figure>
+            <figure class="gal__item--4">
+                <img src="images/whale.jpg" class="gal__img" alt="Image 4">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Whale</figcaption>
+            </figure>
+            <figure class="gal__item--5">
+                <img src="images/soybean.jpg" class="gal__img" alt="Image 5">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Soy bean</figcaption>
+            </figure>
+            <figure class="gal__item--6">
+                <img src="images/seaweed.jpg" class="gal__img" alt="Image 6">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Seaweed</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <div class="container py-4" id="minerals" style="display: none">
+        <div>
+            <h1 style="font-family:Amatic SC, cursive; font-size: 100px">Minerals</h1>
+            <p style="line-height: 1.6; font-size: 25px; color: #0b0b0b; font-family: Arial"><span style="color: red; font-size: 30px">Zinc</span> regulates the neurotransmitter dopamine and may make methylphenidate more effective by improving the brain’s response to dopamine.
+                Low levels of this mineral correlate with inattention.
+                <span style="color: #d39e00; font-size: 30px">Iron</span> is also necessary for making dopamine.
+                Low iron levels correlate with cognitive deficits and severe ADHD. Like zinc, <span style="color: #0044cc; font-size: 30px">Magnesium</span> is used to make neurotransmitters involved in attention and concentration, and it has a calming effect on the brain.</p>
+        </div>
+        <div class="gal">
+            <figure class="gal__item--1">
+                <img src="images/lean_meat.jpg" class="gal__img" alt="Image 1">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Lean meat</figcaption>
+            </figure>
+            <figure class="gal__item--2">
+                <img src="images/Poultry.jpg" class="gal__img" alt="Image 2">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Poultry</figcaption>
+            </figure>
+            <figure class="gal__item--3">
+                <img src="images/sea_food.jpg" class="gal__img" alt="Image 3">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Sea food</figcaption>
+            </figure>
+            <figure class="gal__item--4">
+                <img src="images/nuts.jpg" class="gal__img" alt="Image 4">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Nuts</figcaption>
+            </figure>
+            <figure class="gal__item--5">
+                <img src="images/cereals.png" class="gal__img" alt="Image 5">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Cereals</figcaption>
+            </figure>
+            <figure class="gal__item--6">
+                <img src="images/spanich.jpg" class="gal__img" alt="Image 6">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Spinach</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <div class="container py-4" id="omega" style="display: none">
+        <div>
+            <h1 style="font-family:Amatic SC, cursive; font-size: 100px">Omega n-3</h1>
+            <p style="line-height: 1.6; font-size: 25px; color: #0b0b0b; font-family: Arial">Omega-3s are believed to be important in brain and nerve cell function. A new study, conducted at Göteborg University, in Sweden, concluded that daily doses of omega-3s — found in cold-water, fatty fish, such as sardines, tuna, and salmon — reduced ADHD symptoms by 50 percent.</p>
+        </div>
+        <div class="gal">
+            <figure class="gal__item--1">
+                <img src="images/fish_oil.jpg" class="gal__img" alt="Image 1">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Fish oil</figcaption>
+            </figure>
+            <figure class="gal__item--2">
+                <img src="images/anchovy.jpg" class="gal__img" alt="Image 2">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Anchovy</figcaption>
+            </figure>
+            <figure class="gal__item--3">
+                <img src="images/caviar.jpg" class="gal__img" alt="Image 3">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Caviar</figcaption>
+            </figure>
+            <figure class="gal__item--4">
+                <img src="images/mackerel.jpg" class="gal__img" alt="Image 4">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Mackerel</figcaption>
+            </figure>
+            <figure class="gal__item--5">
+                <img src="images/halibut.jpg" class="gal__img" alt="Image 5">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Halibut</figcaption>
+            </figure>
+            <figure class="gal__item--6">
+                <img src="images/mollusk.jpg" class="gal__img" alt="Image 6">
+                <figcaption style="text-align: center; font-size: 20px; color: black;">Mollusk</figcaption>
+            </figure>
+        </div>
+    </div>
+
+
+</section>
+
+
+
+
+
+
+<!--<section>-->
+<!--	<div id="piechart" class="row" style="flex-direction: row; position: relative; right: 100px; display: none;">-->
+<!--		<div id="chartContainer" style="height: 370px; width: 700px; position: relative; top: 0px; left: 0px;"></div>-->
+<!--		<div style="height: 400px; width: 400px; position: relative; top: 0px; right: 0px;"><img src="images/keto.png"> </div>-->
+<!--	</div>-->
+<!--</section>-->
+
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+<footer class="ftco-footer ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="mouse">
+                <a href="#" class="mouse-icon">
+                    <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+                </a>
+            </div>
+        </div>
+
+
+        <p style="text-align: center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+    </div>
+    </div>
+    </div>
+</footer>
+
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>-->
+<!--  <script src="js/google-map.js"></script>-->
+<script src="js/main.js"></script>
+<script src="js/calculator.js"></script>
+<script>
+    function switch_but(butt) {
+
+        var pro = document.getElementById("protein");
+        var mine = document.getElementById("minerals");
+        var ome = document.getElementById("omega")
+
+        if (butt == "protein"){
+            pro.style.display = "block";
+            mine.style.display = "none";
+            ome.style.display = "none";
+        }
+        else if (butt == "minerals"){
+            pro.style.display = "none";
+            mine.style.display = "block";
+            ome.style.display = "none";
+        }
+        else if(butt == "omega"){
+            pro.style.display = "none";
+            mine.style.display = "none";
+            ome.style.display = "block";
+        }
+        console.log(pro);
+    }
+
+    $(document).ready(function(){
+
+        var quantitiy=0;
+        $('.quantity-right-plus').click(function(e){
+
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            $('#quantity').val(quantity + 1);
+
+
+            // Increment
+
+        });
+
+        $('.quantity-left-minus').click(function(e){
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            // Increment
+            if(quantity>0){
+                $('#quantity').val(quantity - 1);
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

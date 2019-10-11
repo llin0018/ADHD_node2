@@ -1,0 +1,179 @@
+.gal {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 5vw);
+    grid-gap: 15px;
+}
+
+.gal__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gal__item--1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.gal__item--2 {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.gal__item--3 {
+    grid-column-start: 5;
+    grid-column-end: 9;
+    grid-row-start: 1;
+    grid-row-end: 6;
+}
+
+.gal__item--4 {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 6;
+}
+
+.gal__item--5 {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 6;
+    grid-row-end: 9;
+}
+
+.gal__item--6 {
+    grid-column-start: 5;
+    grid-column-end: 9;
+    grid-row-start: 6;
+    grid-row-end: 9;
+}
+
+.protein_span{
+    background: url(../images/icons/chicken_leg.svg) no-repeat top left;
+    background-size: auto;
+    background-position: center;
+    background-size: 200px 100px;
+    cursor: pointer;
+    display: inline-block;
+    height: 100px;
+    width: 200px;
+
+
+}
+
+.minerals_span{
+    background: url(../images/icons/mineral.svg) no-repeat top left;
+    background-size: auto;
+    background-position: center;
+    background-size: 200px 100px;
+    cursor: pointer;
+    display: inline-block;
+    height: 100px;
+    width: 200px;
+
+
+}
+
+.omega_span{
+    background: url(../images/icons/omega_icon.svg) no-repeat top left;
+    background-size: auto;
+    background-position: center;
+    background-size: 200px 100px;
+    cursor: pointer;
+    display: inline-block;
+    height: 100px;
+    width: 200px;
+
+
+}
+
+.switch_button{
+    background: none;
+    border: none !important;
+    /*color: none;*/
+    /*padding: 100px 16px;*/
+    top: 100px;
+    left: 100px;
+    position: relative;
+    font-size: 16px;
+    margin: 50px;
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
+}
+
+.button_text{
+    vertical-align: center;
+    font-family: "Amatic SC", cursive;
+    font-size: 50px;
+    width: 200px;
+}
+
+.container_food {
+    /*display: block;*/
+    margin-left: 50px;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container_food input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container_food:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container_food input:checked ~ .checkmark {
+    background-color: #1e7e34;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container_food input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container_food .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}

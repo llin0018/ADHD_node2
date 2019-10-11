@@ -1,0 +1,161 @@
+//GENERAL SCSS SETUP
+$c-white: #ffffff;
+
+@mixin fontawesome{
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes radio-button {
+  0%   {transform:translateY(-50%) scale(0); box-shadow:0 0 0px rgba(0,0,0,0.2);}
+  80%  {transform:translateY(-50%) scale(1.2);}
+  100% {transform:translateY(-50%) scale(1); box-shadow:0 0 3px rgba(0,0,0,0.2);}
+}
+
+body{
+  background:#222;
+}
+
+
+.container{
+  width:320px;
+  background:#111;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translateX(-50%) translateY(-50%) translateZ(0px);
+  padding:15px 30px;
+  border-radius:3px;
+  box-shadow:0 0 3px rgba(0,0,0,0.2);
+
+  div[class*="m-"]{
+    margin:15px;
+    display:block;
+  }
+
+  form{
+    legend{
+      color:$c-white;
+      font-weight:600;
+      margin-bottom:5px;
+      font-size:18px;
+      line-height:26px;
+      text-transform:uppercase;
+    }
+    label{
+      color:$c-white;
+      display:block;
+      margin-bottom:10px;
+      font-size:16px;
+      line-height:22px;
+      vertical-align:middle;
+      position:relative;
+      padding-left:30px;
+    }
+
+    //THIS IS THE CUSTOM CODE
+    input[type="checkbox"]{
+      opacity:0;
+      z-index:-1;
+      position:absolute;
+      width:auto;
+
+      & + label{
+        &:before{
+          @include fontawesome;
+          content:" ";
+          display:block;
+          width:20px;
+          height:20px;
+          background:$c-white;
+          position:absolute;
+          left:0;
+          top:50%;
+          transform:translateY(-50%);
+          border-radius:2px;
+          transition:all .3s ease-in-out;
+          text-shadow:0 0 3px rgba(0,0,0,0.3);
+        }
+
+        &:hover, &:focus{
+          cursor:pointer;
+          &:before{
+            background:#25A5D9;
+          }
+        }
+      }
+
+      &:checked + label{
+        &:before{
+          content:"\f00c";
+          background:#25A5D9;
+          color:$c-white;
+          text-align:center;
+          font-size:12px;
+          line-height:20px;
+        }
+      }
+    }
+
+    //THIS IS THE CUSTOM CODE
+    input[type="radio"]{
+      opacity:0;
+      z-index:-1;
+      position:absolute;
+      width:auto;
+
+      & + label{
+        &:before{
+          @include fontawesome;
+          content:" ";
+          display:block;
+          width:20px;
+          height:20px;
+          background:$c-white;
+          position:absolute;
+          left:0;
+          top:50%;
+          transform:translateY(-50%);
+          border-radius:10px;
+          transition:background .3s linear;
+          //vertical-align:middle;
+        }
+
+        &:after{
+          content:" ";
+          display:block;
+          width:10px;
+          height:10px;
+          background:$c-white;
+          position:absolute;
+          left:5px;
+          top:50%;
+          border-radius:5px;
+          transform:translateY(-50%) scale(0);
+          transform-origin:center;
+        }
+
+        &:hover, &:focus{
+          cursor:pointer;
+          &:before{
+            background:#25A5D9;
+          }
+        }
+      }
+
+      &:checked + label{
+        &:before{
+          background:#25A5D9;
+        }
+        &:after{
+          animation: radio-button 0.3s normal forwards;
+
+        }
+      }
+    }
+  }
+}

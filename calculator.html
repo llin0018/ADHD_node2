@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Supporting ADHD patients</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<link rel="stylesheet" href="css/aos.css">
+
+	<link rel="stylesheet" href="css/ionicons.min.css">
+
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+	<link rel="stylesheet" href="css/flaticon.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/add-food.css">
+	<link rel="stylesheet" href="css/food_info.css">
+
+</head>
+<body class="goto-here">
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	<div class="container">
+		<a style="font-family: Amatic SC, cursive;font-size: 50px" class="navbar-brand" href="home.html">ADDVICE</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="oi oi-menu"></span> Menu
+		</button>
+
+		<div class="collapse navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nutrition</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown04">
+						<a class="dropdown-item" href="calculator.html">Nutrition calculator</a>
+						<a class="dropdown-item" href="food.html">Food list</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Activities</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown04">
+						<a class="dropdown-item" href="quiz.html">IPAQ test</a>
+						<a class="dropdown-item" href="contact.html">Near by activities(current location)</a>
+						<a class="dropdown-item" href="contactownloc.html">Near by activities(search)</a>
+					</div>
+				</li>
+				<li class="nav-item"><a href="mit3.html" class="nav-link">Medical Centres</a></li>
+				<li class="nav-item"><a href="blog.html" class="nav-link">Notification</a></li>
+				<li class="nav-item"><a href="puzle.html" class="nav-link">Puzzle</a></li>
+
+
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- END nav -->
+
+<div class="hero-wrap hero-bread" style="background-image: url('images/food-calculator.png'); height: 600px">
+<!--	<div class="container">-->
+<!--		<div class="row no-gutters slider-text align-items-center justify-content-center">-->
+<!--			<div class="col-md-9 ftco-animate text-center">-->
+
+<!--				<h1 class="mb-0 bread">Nutrition Calculator</h1>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+	<div class="container">
+		<div class="row no-gutters slider-text align-items-center justify-content-center">
+			<div class="col-md-9 ftco-animate text-center">
+				<div  class="conthead">
+					<div style=" margin-top: 10px" class="animate seven">
+						<span>N</span><span>u</span><span>t</span><span>r</span><span>i</span><span>t</span><span>i</span><span>o</span><span>n</span>&nbsp;
+						<span>C</span><span>a</span><span>l</span><span>c</span><span>u</span><span>l</span><span>a</span><span>t</span><span>o</span><span>r</span>
+					</div>
+
+
+					<a style="width:130px; color:yellow;margin-top: 100px" href= "#jmp" class=" animated-button victoria-four"><h2 style="color:black;font-size: 20px ">Let's count</h2></a>
+
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<section class="ftco-section ftco-cart"  id="jmp">
+	<div class="container py-4">
+		<div class="row d-flex justify-content-center py-5">
+			<div class="col-md-6">
+				<h2 style="font-size: 22px;" class="mb-0">Search what you have eaten</h2>
+				<span>To calculate your nutrition consumption</span>
+			</div>
+			<div class="col-md-6 d-flex align-items-center">
+				<form class="subscribe-form">
+					<div class="form-group d-flex">
+						<input id="foodname" type="text" class="form-control" placeholder="Have a try">
+						<p><a class="btn btn-primary" onclick="output()" style="height: 55px; vertical-align: center; text-align: -webkit-center;">Search</a></p>
+					</div>
+					<div style="display: none">
+						<label class="container_food" >Raw
+							<input type="radio" checked="checked" name="radio" id="raw">
+							<span class="checkmark"></span>
+						</label>
+						<label class="container_food" >Cooked
+							<input type="radio" name="radio" id="cooked">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container py-4">
+		<div>
+			<div class="form-group d-flex">
+				<input style="display: inline-block; text-align: center; text-decoration: none; margin: 2px 0; border: solid 1px transparent; border-radius: 4px; padding: 0.5em 1em; color: #ffffff; background-color: #1e7e34" type="submit" id="customise-button" onclick="addCustomerFoodButton()" value="Add your own food here."  class="submit px-3">
+			</div>
+
+			<div class="customize-food" style="display: none">
+
+				<form>
+					<p>Food name</p>
+					<input id="addname">
+					<p>Quantity(gram)</p>
+					<input id="addquantity">
+					<p>Omega n-3(g)</p>
+					<input id ="addeng">
+					<p>Zinc(mg)</p>
+					<input id="addfib">
+					<p>Protein(g)</p>
+					<input id="addsug">
+					<p>Iron(mg)</p>
+					<input id="addfat">
+					<p>Magnesium(mg)</p>
+					<input id="addcarb">
+				</form>
+				<button style="margin-top: 10px;" class="btn btn-primary py-3 px-4" onclick="addCustomerFood()">Add</button>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-12 ftco-animate">
+
+				<div class="cart-list">
+				</div>
+				<h1 class="mb-0 bread" style="color: #0b0b0b">Food list</h1>
+				<div>
+					<table class="table">
+						<thead class="thead-primary">
+						<tr class="text-center">
+							<th>Food name</th>
+							<th>Quantity</th>
+							<th>Serving size</th>
+							<th>Option</th>
+						</tr>
+						</thead>
+						<tbody id = "foods">
+						<!--						      <tr class="text-center">-->
+						<!--						        <td class="product-remove">Food 1</td>-->
+						<!--						        -->
+						<!--						        <td class="image-prod">1</td>-->
+						<!--						        -->
+						<!--						        <td class="product-name">-->
+						<!--						        	<h3>1 Cup</h3>-->
+						<!--						        </td>-->
+						<!--						        -->
+						<!--						        <td class="price">Add to Cart</td>-->
+						<!--						        -->
+
+						<!--						      </tr>&lt;!&ndash; END TR&ndash;&gt;-->
+
+						<!--						      <tr class="text-center">-->
+						<!--						        <td class="product-remove">Food 2</td>-->
+
+						<!--						        <td class="image-prod">3</td>-->
+
+						<!--						        <td class="product-name">-->
+						<!--						        	<h3>1 OZ</h3>-->
+						<!--						        </td>-->
+
+						<!--						        <td class="price">Add to Cart</td>-->
+
+
+						<!--						      </tr>&lt;!&ndash; END TR&ndash;&gt;-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<h1 class="mb-0 bread" style="color: #0b0b0b">Your food list</h1>
+		<div>
+			<table id="userTable" class="table">
+				<thead class="thead-primary">
+				<tr class="text-center">
+					<th style="font-weight: bold; text-transform: uppercase;">Food name</th>
+					<th style="font-weight: bold; text-transform: uppercase;">Quantity</th>
+					<th style="font-weight: bold; text-transform: uppercase;">Serving size</th>
+					<th style="font-weight: bold; text-transform: uppercase;">Omega n-3(g)</th>
+					<th style="font-weight: bold; text-transform: uppercase;">Zinc(mg)</th>
+					<th style="font-weight: bold; text-transform: uppercase;">Protein(g)</th>
+					<th style="font-weight: bold; text-transform: uppercase;">Iron(mg)</th>
+					<th style="font-weight: bold; text-transform: uppercase;">Magnesium(mg)</th>
+					<th style="font-weight: bold; text-transform: uppercase;">Option</th>
+				</tr>
+
+				</thead>
+				<tbody id="foods2">
+
+				</tbody>
+
+			</table>
+			<div>
+
+			</div>
+
+
+			<div  style="position: relative;">
+				<div class="cart-total mb-3" style="width: 400px; float: left">
+					<h3>Total Consumption</h3>
+					<p class="d-flex total-price">
+						<span>Omega n-3(g)</span>
+						<span id="ome">0</span>
+					</p>
+					<p class="d-flex total-price">
+						<span>Zinc(mg)</span>
+						<span id="zinc">0</span>
+					</p>
+					<p class="d-flex total-price">
+						<span>Protein(g)</span>
+						<span id="pre">0</span>
+					</p>
+					<p class="d-flex total-price">
+						<span>Iron(mg)</span>
+						<span id="iron">0</span>
+					</p>
+					<p class="d-flex total-price">
+						<span>Magnesium(mg)</span>
+						<span id="mg">0</span>
+					</p>
+
+
+
+				</div>
+				<div style="position: relative; width: 700px; float: right" >
+					<p style="font-size: 20px; color: black;"> It's better to intake <span style="color: #005cbf">1.6g Omega n-3</span>, <span style="color: #20c997">50g protein</span>, <span style="color: #bd2130">8mg zinc</span>, <span style="color: #6f42c1">18mg iron</span> and <span style="color: #e4b2d6">410mg magnesium</span> per day.</p>
+					<div id="smile">
+
+
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<!--<section>-->
+<!--	<div id="piechart" class="row" style="flex-direction: row; position: relative; right: 100px; display: none;">-->
+<!--		<div id="chartContainer" style="height: 370px; width: 700px; position: relative; top: 0px; left: 0px;"></div>-->
+<!--		<div style="height: 400px; width: 400px; position: relative; top: 0px; right: 0px;"><img src="images/keto.png"> </div>-->
+<!--	</div>-->
+<!--</section>-->
+
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+<footer class="ftco-footer ftco-section">
+	<div class="container">
+		<div class="row">
+			<div class="mouse">
+				<a href="#" class="mouse-icon">
+					<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+				</a>
+			</div>
+		</div>
+
+
+		<p style="text-align: center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+		</p>
+	</div>
+	</div>
+	</div>
+</footer>
+
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>-->
+<!--  <script src="js/google-map.js"></script>-->
+<script src="js/main.js"></script>
+<script src="js/calculator.js"></script>
+<script>
+	function switch_but(butt) {
+
+		var pro = document.getElementById("protein");
+		var mine = document.getElementById("minerals");
+		var ome = document.getElementById("omega")
+
+		if (butt == "protein"){
+			pro.style.display = "block";
+			mine.style.display = "none";
+			ome.style.display = "none";
+		}
+		else if (butt == "minerals"){
+			pro.style.display = "none";
+			mine.style.display = "block";
+			ome.style.display = "none";
+		}
+		else if(butt == "omega"){
+			pro.style.display = "none";
+			mine.style.display = "none";
+			ome.style.display = "block";
+		}
+		console.log(pro);
+	}
+
+	$(document).ready(function(){
+
+		var quantitiy=0;
+		$('.quantity-right-plus').click(function(e){
+
+			// Stop acting like a button
+			e.preventDefault();
+			// Get the field name
+			var quantity = parseInt($('#quantity').val());
+
+			// If is not undefined
+
+			$('#quantity').val(quantity + 1);
+
+
+			// Increment
+
+		});
+
+		$('.quantity-left-minus').click(function(e){
+			// Stop acting like a button
+			e.preventDefault();
+			// Get the field name
+			var quantity = parseInt($('#quantity').val());
+
+			// If is not undefined
+
+			// Increment
+			if(quantity>0){
+				$('#quantity').val(quantity - 1);
+			}
+		});
+
+	});
+</script>
+
+</body>
+</html>

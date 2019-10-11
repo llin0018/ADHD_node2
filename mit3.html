@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Supporting ADHD patients</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:404,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+            margin-left: 400px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        /*html, body {*/
+        /*    height: 100%;*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*}*/
+        /*body {*/
+        /*    padding: 0 !important;*/
+        /*}*/
+        /*table {*/
+        /*    font-size: 12px;*/
+        /*}*/
+        .hotel-search {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background: #fff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 440px;
+            z-index: 1;
+        }
+        #map {
+            margin-top: 40px;
+            width: 500px;
+            margin-left: 410px;
+        }
+        #listing {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            overflow: auto;
+            left: 442px;
+            top: 0px;
+            cursor: pointer;
+            overflow-x: hidden;
+        }
+        #findhotels {
+            font-size: 14px;
+        }
+        #locationField {
+            -webkit-box-flex: 1 1 190px;
+            -ms-flex: 1 1 190px;
+            flex: 1 1 190px;
+            margin: 0 8px;
+        }
+        #controls {
+            -webkit-box-flex: 1 1 140px;
+            -ms-flex: 1 1 140px;
+            flex: 1 1 140px;
+        }
+        #autocomplete {
+            width: 100%;
+        }
+        #country {
+            width: 100%;
+        }
+        .placeIcon {
+            width: 20px;
+            height: 34px;
+            margin: 4px;
+        }
+        .hotelIcon {
+            width: 24px;
+            height: 24px;
+        }
+        #resultsTable {
+            border-collapse: collapse;
+            width: 240px;
+        }
+        #rating {
+            font-size: 13px;
+            font-family: Arial Unicode MS;
+        }
+        .iw_table_row {
+            height: 18px;
+        }
+        .iw_attribute_name {
+            font-weight: bold;
+            text-align: right;
+        }
+        .iw_table_icon {
+            text-align: right;
+        }
+    </style>
+</head>
+<script type="text/javascript">
+    // This example uses the autocomplete feature of the Google Places API.
+    // It allows the user to find all hotels in a given place, within a given
+    // country. It then displays markers for all the hotels returned,
+    // with on-click details for each hotel.
+
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    var map, places, infoWindow;
+    var markers = [];
+    var autocomplete;
+    var countryRestrict = {'country': 'au'};
+    var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
+    var hostnameRegexp = new RegExp('^https?://.+?/');
+
+    var countries = {
+        'au': {
+            center: {lat: -25.3, lng: 133.8},
+            zoom: 4
+        },
+        'br': {
+            center: {lat: -14.2, lng: -51.9},
+            zoom: 3
+        },
+        'ca': {
+            center: {lat: 62, lng: -110.0},
+            zoom: 3
+        },
+        'fr': {
+            center: {lat: 46.2, lng: 2.2},
+            zoom: 5
+        },
+        'de': {
+            center: {lat: 51.2, lng: 10.4},
+            zoom: 5
+        },
+        'mx': {
+            center: {lat: 23.6, lng: -102.5},
+            zoom: 4
+        },
+        'nz': {
+            center: {lat: -40.9, lng: 174.9},
+            zoom: 5
+        },
+        'it': {
+            center: {lat: 41.9, lng: 12.6},
+            zoom: 5
+        },
+        'za': {
+            center: {lat: -30.6, lng: 22.9},
+            zoom: 5
+        },
+        'es': {
+            center: {lat: 40.5, lng: -3.7},
+            zoom: 5
+        },
+        'pt': {
+            center: {lat: 39.4, lng: -8.2},
+            zoom: 6
+        },
+        'us': {
+            center: {lat: 37.1, lng: -95.7},
+            zoom: 3
+        },
+
+    };
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: countries['au'].zoom,
+            center: countries['au'].center,
+            mapTypeControl: false,
+            panControl: false,
+            zoomControl: false,
+            streetViewControl: false
+        });
+
+        infoWindow = new google.maps.InfoWindow({
+            content: document.getElementById('info-content')
+        });
+
+        // Create the autocomplete object and associate it with the UI input control.
+        // Restrict the search to the default country, and to place type "cities".
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */ (
+                document.getElementById('autocomplete')), {
+                types: ['(cities)'],
+                componentRestrictions: countryRestrict
+            });
+        places = new google.maps.places.PlacesService(map);
+
+        autocomplete.addListener('place_changed', onPlaceChanged);
+    }
+
+    // When the user selects a city, get the place details for the city and
+    // zoom the map in on the city.
+    function onPlaceChanged() {
+        var place = autocomplete.getPlace();
+        if (place.geometry) {
+            map.panTo(place.geometry.location);
+            map.setZoom(15);
+            search();
+        } else {
+            document.getElementById('autocomplete').placeholder = 'Enter a city';
+        }
+    }
+
+    // Search for hotels in the selected city, within the viewport of the map.
+    function search() {
+        var dropdownoption = document.getElementById("filter");
+        var search = {
+            bounds: map.getBounds(),
+            types: [dropdownoption.options[dropdownoption.selectedIndex].value]
+        };
+
+        places.nearbySearch(search, function(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                clearResults();
+                clearMarkers();
+                // Create a marker for each hotel found, and
+                // assign a letter of the alphabetic to each marker icon.
+                for (var i = 0; i < results.length; i++) {
+                    var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+                    var markerIcon = MARKER_PATH + markerLetter + '.png';
+                    // Use marker animation to drop the icons incrementally on the map.
+                    markers[i] = new google.maps.Marker({
+                        position: results[i].geometry.location,
+                        animation: google.maps.Animation.DROP,
+                        icon: markerIcon
+                    });
+                    // If the user clicks a hotel marker, show the details of that hotel
+                    // in an info window.
+                    markers[i].placeResult = results[i];
+                    google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+                    setTimeout(dropMarker(i), i * 100);
+                    addResult(results[i], i);
+                }
+            }
+        });
+    }
+
+    function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            if (markers[i]) {
+                markers[i].setMap(null);
+            }
+        }
+        markers = [];
+    }
+
+    function dropMarker(i) {
+        return function() {
+            markers[i].setMap(map);
+        };
+    }
+
+    function addResult(result, i) {
+        var results = document.getElementById('results');
+        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+        var markerIcon = MARKER_PATH + markerLetter + '.png';
+
+        var tr = document.createElement('tr');
+        tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
+        tr.onclick = function() {
+            google.maps.event.trigger(markers[i], 'click');
+        };
+
+        var iconTd = document.createElement('td');
+        var nameTd = document.createElement('td');
+        var icon = document.createElement('img');
+        icon.src = markerIcon;
+        icon.setAttribute('class', 'placeIcon');
+        icon.setAttribute('className', 'placeIcon');
+        var name = document.createTextNode(result.name);
+        iconTd.appendChild(icon);
+        nameTd.appendChild(name);
+        tr.appendChild(iconTd);
+        tr.appendChild(nameTd);
+        results.appendChild(tr);
+    }
+
+    function clearResults() {
+        var results = document.getElementById('results');
+        while (results.childNodes[0]) {
+            results.removeChild(results.childNodes[0]);
+        }
+    }
+
+    // Get the place details for a hotel. Show the information in an info window,
+    // anchored on the marker for the hotel that the user selected.
+    function showInfoWindow() {
+        var marker = this;
+        places.getDetails({placeId: marker.placeResult.place_id},
+            function(place, status) {
+                if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                    return;
+                }
+                infoWindow.open(map, marker);
+                buildIWContent(place);
+            });
+    }
+
+    // Load the place information into the HTML elements used by the info window.
+    function buildIWContent(place) {
+        document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+            'src="' + place.icon + '"/>';
+        document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
+            '">' + place.name + '</a></b>';
+        document.getElementById('iw-address').textContent = place.vicinity;
+
+        if (place.formatted_phone_number) {
+            document.getElementById('iw-phone-row').style.display = '';
+            document.getElementById('iw-phone').textContent =
+                place.formatted_phone_number;
+        } else {
+            document.getElementById('iw-phone-row').style.display = 'none';
+        }
+
+        // Assign a five-star rating to the hotel, using a black star ('&#10029;')
+        // to indicate the rating the hotel has earned, and a white star ('&#10025;')
+        // for the rating points not achieved.
+        if (place.rating) {
+            var ratingHtml = '';
+            for (var i = 0; i < 5; i++) {
+                if (place.rating < (i + 0.5)) {
+                    ratingHtml += '&#10025;';
+                } else {
+                    ratingHtml += '&#10029;';
+                }
+                document.getElementById('iw-rating-row').style.display = '';
+                document.getElementById('iw-rating').innerHTML = ratingHtml;
+            }
+        } else {
+            document.getElementById('iw-rating-row').style.display = 'none';
+        }
+
+        // The regexp isolates the first part of the URL (domain plus subdomain)
+        // to give a short URL for displaying in the info window.
+        if (place.website) {
+            var fullUrl = place.website;
+            var website = hostnameRegexp.exec(place.website);
+            if (website === null) {
+                website = 'http://' + place.website + '/';
+                fullUrl = website;
+            }
+            document.getElementById('iw-website-row').style.display = '';
+            document.getElementById('iw-website').textContent = website;
+        } else {
+            document.getElementById('iw-website-row').style.display = 'none';
+        }
+    }
+</script>
+
+<body class="goto-here">
+<div class="py-1 bg-primary">
+    <div class="container">
+        <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+            <div class="col-lg-12 d-block">
+                <div class="row d-flex">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a style="font-family: Amatic SC, cursive;font-size: 50px" class="navbar-brand" href="home.html">ADDVICE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nutrition</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="calculator.html">Nutrition calculator</a>
+                        <a class="dropdown-item" href="food.html">Food list</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Activities</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="quiz.html">IPAQ test</a>
+                        <a class="dropdown-item" href="contact.html">Near by activities(current location)</a>
+                        <a class="dropdown-item" href="contactownloc.html">Near by activities(search)</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="mit3.html" class="nav-link">Medical Centres</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Notification</a></li>
+                <li class="nav-item"><a href="puzle.html" class="nav-link">Puzzle</a></li>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->
+
+<div class="hero-wrap hero-bread" style="background-image: url('images/medicalcenter.jpg');opacity: 1">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <!--                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact us</span></p>-->
+                </br></br></br></br></br>
+                <p class="mb-0 bread"style="color:darkgreen;opacity: 0.9;font-size: 40px">Your nearby Treatment Centers</p>
+
+            </div>
+        </div>
+    </div>
+
+    <!--<section class="ftco-section contact-section bg-light">-->
+
+</section>
+    <div class="container">
+        <!--        <div class="row d-flex mb-5 contact-info">-->
+        <!--            <div class="w-100"></div>-->
+        <!--            <div class="col-md-3 d-flex">-->
+        <!--                <div class="info bg-white p-4">-->
+
+        <!--                </div>-->
+        <!--            </div>-->
+
+        <!--            <div class="col-md-3 d-flex">-->
+        <!--                <div class="info bg-white p-4">-->
+
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="col-md-3 d-flex">-->
+        <!--                <div class="info bg-white p-4">-->
+
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="col-md-3 d-flex">-->
+        <!--                <div class="info bg-white p-4">-->
+
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <div class="row block-9">-->
+        <!--            <div class="col-md-6 order-md-last d-flex">-->
+        <!--            <form action="#" class="bg-white p-5 contact-form">-->
+        <!--                <div class="form-group">-->
+        <!--                    <div class="contai">-->
+        <!--                        <h5 style="color: white">Select an activity</h5>-->
+        <!--                        <div class="select">-->
+
+        <!--                            <select id="filter" onload="fn_type('Gym')">-->
+
+
+        <ul id="places" ></ul>
+
+    </div>
+
+</div>
+
+
+<!--<div style="margin-left: 200px " >-->
+
+
+        <div id="locationField" style="position: relative; margin-left: 400px; float: left;"></br>
+            <input style="width:200px;" id="autocomplete" placeholder="Enter a city" type="text" />
+
+
+            <div id="controls"   style="float: right">
+                <select  class="custom-select" id ="filter"  onchange="search()">
+                    <option value="hospital">Treatment Center</option>
+                    <option value="pharmacy">Pharmacy</option>
+                    <option value="drugstore">Drug Store </option>
+
+                </select>
+            </div>
+
+        </div>
+
+</br>
+
+<div style="margin-left: 350px" id="map"></div>
+
+<div id="listing">
+    <table id="resultsTable">
+        <tbody id="results"></tbody>
+    </table>
+</div>
+<div style="display: none">
+    <div id="info-content">
+        <table>
+            <tr id="iw-url-row" class="iw_table_row">
+                <td id="iw-icon" class="iw_table_icon"></td>
+                <td id="iw-url"></td>
+            </tr>
+            <tr id="iw-address-row" class="iw_table_row">
+                <td class="iw_attribute_name">Address:</td>
+                <td id="iw-address"></td>
+            </tr>
+            <tr id="iw-phone-row" class="iw_table_row">
+                <td class="iw_attribute_name">Telephone:</td>
+                <td id="iw-phone"></td>
+            </tr>
+            <tr id="iw-rating-row" class="iw_table_row">
+                <td class="iw_attribute_name">Rating:</td>
+                <td id="iw-rating"></td>
+            </tr>
+            <tr id="iw-website-row" class="iw_table_row">
+                <td class="iw_attribute_name">Website:</td>
+                <td id="iw-website"></td>
+            </tr>
+        </table>
+    </div>
+
+</br></br>
+<footer class="ftco-footer ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="mouse">
+                <a href="#" class="mouse-icon">
+                    <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+                </a>
+            </div>
+        </div>
+
+
+        <p style="text-align: center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+    </div>
+    </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script
+        src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyDG3k6Ps69PWJicK2HsWHFw2pbi--Cfz1E&callback=initMap&libraries=places,geometry">
+</script>
+<script src="js/google-map.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
